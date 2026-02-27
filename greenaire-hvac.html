@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenAire HVAC | Electric & Green Energy Heating & Cooling</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #0d3b2e;
+    --leaf: #1a7a52;
+    --mint: #4ecb8d;
+    --sky: #a8edcc;
+    --cream: #f5f0e8;
+    --charcoal: #1c1c1c;
+    --warm: #e8f5f0;
+    --gold: #c8a84b;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(13,59,46,0.95);
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.5rem;
+    color: var(--mint);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul a {
+    font-size: 0.9rem; font-weight: 500; color: var(--sky);
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--mint); }
+  .nav-cta {
+    background: var(--mint); color: var(--forest) !important;
+    padding: 10px 22px; border-radius: 50px; font-weight: 700 !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(78,203,141,0.4); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--forest);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,122,82,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(78,203,141,0.12) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: linear-gradient(rgba(78,203,141,1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(78,203,141,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  /* animated circle orbs */
+  .orb {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--mint); top: -100px; right: 5%; animation-delay: 0s; }
+  .orb2 { width: 300px; height: 300px; background: var(--gold); bottom: 0; left: 10%; animation-delay: 3s; }
+  @keyframes drift { from { transform: translate(0,0); } to { transform: translate(20px, -30px); } }
+
+  .hero-content { position: relative; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(78,203,141,0.15); border: 1px solid rgba(78,203,141,0.3);
+    padding: 8px 18px; border-radius: 50px; margin-bottom: 28px;
+    font-size: 0.8rem; font-weight: 600; color: var(--mint); letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.6rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800; line-height: 1.0;
+    color: var(--white); margin-bottom: 24px;
+    letter-spacing: -2px;
+  }
+  h1 em { color: var(--mint); font-style: normal; }
+  .hero-sub {
+    font-size: 1.15rem; color: rgba(255,255,255,0.7);
+    line-height: 1.7; margin-bottom: 40px; max-width: 520px;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--mint); color: var(--forest);
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+    padding: 16px 36px; border-radius: 50px; border: none; cursor: pointer;
+    text-decoration: none; transition: all 0.25s;
+    box-shadow: 0 4px 30px rgba(78,203,141,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(78,203,141,0.6); background: #5dd99a; }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem;
+    padding: 16px 36px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.3); cursor: pointer;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--mint); color: var(--mint); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+    padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item h3 {
+    font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800;
+    color: var(--mint); line-height: 1;
+  }
+  .stat-item p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--charcoal); padding: 18px 5%;
+    display: flex; align-items: center; justify-content: center; gap: 60px;
+    flex-wrap: wrap;
+  }
+  .trust-item { font-size: 0.8rem; color: rgba(255,255,255,0.45); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+  .trust-item span { color: var(--gold); font-weight: 700; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--leaf);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800; line-height: 1.1; letter-spacing: -1px;
+    color: var(--forest); margin-bottom: 20px;
+  }
+  .section-sub { font-size: 1.05rem; color: #555; line-height: 1.7; max-width: 560px; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-top: 60px;
+  }
+  .service-card {
+    background: var(--cream); border-radius: 20px; padding: 36px 32px;
+    border: 1px solid rgba(26,122,82,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--mint), var(--leaf));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(13,59,46,0.12); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--leaf), var(--forest));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 20px;
+  }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
+    color: var(--forest); margin-bottom: 12px;
+  }
+  .service-card p { font-size: 0.93rem; color: #666; line-height: 1.65; }
+  .service-tag {
+    display: inline-block; margin-top: 16px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;
+    color: var(--leaf); background: rgba(26,122,82,0.08);
+    padding: 5px 12px; border-radius: 20px;
+  }
+
+  /* ── WHY US ── */
+  .why-us {
+    background: var(--forest); position: relative; overflow: hidden;
+  }
+  .why-us .section-title { color: var(--white); }
+  .why-us .section-label { color: var(--mint); }
+  .why-us .section-sub { color: rgba(255,255,255,0.6); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; margin-top: 60px;
+  }
+  .why-visual {
+    background: rgba(78,203,141,0.05);
+    border: 1px solid rgba(78,203,141,0.15);
+    border-radius: 24px; padding: 48px 40px;
+  }
+  .why-big-stat {
+    font-family: 'Syne', sans-serif;
+    font-size: 7rem; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--mint), var(--sky));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .why-big-label { color: rgba(255,255,255,0.6); font-size: 1rem; margin-top: 8px; }
+  .divider { height: 1px; background: rgba(78,203,141,0.2); margin: 32px 0; }
+  .why-points { display: flex; flex-direction: column; gap: 20px; }
+  .why-point { display: flex; gap: 16px; align-items: flex-start; }
+  .check {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(78,203,141,0.15); border: 1px solid rgba(78,203,141,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--mint); font-size: 0.8rem; margin-top: 2px;
+  }
+  .why-point h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700; color: var(--white);
+    margin-bottom: 4px; font-size: 1rem;
+  }
+  .why-point p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ── PROCESS ── */
+  .process { background: var(--cream); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 60px; position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute; top: 36px; left: 12.5%; right: 12.5%; height: 2px;
+    background: linear-gradient(90deg, var(--mint), var(--leaf));
+    z-index: 0;
+  }
+  .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .step-num {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--forest); color: var(--mint);
+    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px; border: 3px solid var(--mint);
+    box-shadow: 0 0 0 6px var(--cream);
+  }
+  .step h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    color: var(--forest); margin-bottom: 10px;
+  }
+  .step p { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .t-card {
+    background: var(--cream); border-radius: 20px; padding: 32px 28px;
+    border: 1px solid rgba(26,122,82,0.08);
+    transition: transform 0.3s;
+  }
+  .t-card:hover { transform: translateY(-4px); }
+  .stars { color: var(--gold); margin-bottom: 16px; letter-spacing: 2px; }
+  .t-card p {
+    font-size: 0.95rem; line-height: 1.7; color: #444;
+    font-style: italic; margin-bottom: 20px;
+  }
+  .t-author { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white);
+  }
+  .av1 { background: linear-gradient(135deg, #1a7a52, #0d3b2e); }
+  .av2 { background: linear-gradient(135deg, #c8a84b, #a07830); }
+  .av3 { background: linear-gradient(135deg, #4ecb8d, #1a7a52); }
+  .t-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--forest); }
+  .t-loc { font-size: 0.78rem; color: #888; }
+
+  /* ── LEAD FORM ── */
+  .lead-form-section {
+    background: linear-gradient(135deg, var(--forest) 0%, #0a4d35 100%);
+    position: relative; overflow: hidden;
+  }
+  .lead-form-section .orb { opacity: 0.1; }
+  .form-container {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; position: relative; z-index: 1;
+  }
+  .form-left .section-title { color: var(--white); }
+  .form-left .section-label { color: var(--mint); }
+  .form-perks { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+  .perk { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.75); font-size: 0.93rem; }
+  .perk-icon { color: var(--mint); font-size: 1.1rem; }
+
+  .form-box {
+    background: var(--white); border-radius: 24px; padding: 40px 36px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+  .form-box h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem;
+    color: var(--forest); margin-bottom: 6px;
+  }
+  .form-box p { font-size: 0.9rem; color: #777; margin-bottom: 28px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--forest); margin-bottom: 6px; letter-spacing: 0.3px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 13px 16px;
+    border: 1.5px solid #e0e0e0; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.93rem; color: var(--charcoal);
+    background: #fafafa; transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--mint); box-shadow: 0 0 0 3px rgba(78,203,141,0.15);
+    background: var(--white);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-submit {
+    width: 100%; background: var(--forest); color: var(--white);
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+    padding: 16px; border-radius: 10px; border: none; cursor: pointer;
+    transition: all 0.25s; margin-top: 8px; letter-spacing: 0.3px;
+  }
+  .form-submit:hover { background: var(--leaf); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,59,46,0.4); }
+  .form-note { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 12px; }
+
+  /* ── SERVICE AREAS ── */
+  .areas { background: var(--cream); }
+  .areas-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 12px; margin-top: 40px;
+  }
+  .area-chip {
+    background: var(--white); border-radius: 10px; padding: 14px 16px;
+    font-size: 0.88rem; font-weight: 500; color: var(--forest);
+    border: 1px solid rgba(26,122,82,0.12); text-align: center;
+    transition: all 0.2s;
+  }
+  .area-chip:hover { background: var(--forest); color: var(--mint); border-color: var(--forest); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); padding: 60px 5% 30px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  footer .logo { font-size: 1.6rem; margin-bottom: 14px; display: block; }
+  .footer-desc { font-size: 0.88rem; line-height: 1.7; margin-bottom: 20px; }
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--mint); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px; flex-wrap: wrap; gap: 12px;
+    font-size: 0.8rem;
+  }
+  .minority-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,168,75,0.1); border: 1px solid rgba(200,168,75,0.25);
+    padding: 6px 14px; border-radius: 20px;
+    color: var(--gold); font-size: 0.78rem; font-weight: 600;
+  }
+  .phone-cta {
+    text-align: center; background: var(--mint); color: var(--forest); padding: 6px 20px; border-radius: 30px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
+    display: inline-block; text-decoration: none;
+  }
+
+  /* ── SUCCESS STATE ── */
+  .success-msg {
+    display: none; text-align: center; padding: 20px;
+  }
+  .success-msg h3 { font-family: 'Syne', sans-serif; color: var(--forest); font-size: 1.5rem; margin-bottom: 10px; }
+  .success-msg p { color: #666; }
+  .success-icon { font-size: 3rem; margin-bottom: 14px; }
+
+  /* ── STICKY CTA ── */
+  .sticky-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: var(--forest); padding: 14px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.3);
+    transform: translateY(100%); transition: transform 0.4s;
+  }
+  .sticky-bar.visible { transform: translateY(0); }
+  .sticky-bar p { color: var(--white); font-size: 0.95rem; }
+  .sticky-bar p strong { color: var(--mint); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .why-grid, .form-container, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+  }
+  @media (max-width: 600px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Green<span>Aire</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Free Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Minority-Owned &amp; Certified Green</div>
+    <h1>Clean Air.<br><em>Green Energy.</em><br>Your Home.</h1>
+    <p class="hero-sub">Next-generation electric heating and cooling systems that slash your energy bills, cut carbon emissions, and deliver comfort you'll feel all year long.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <h3>40%</h3>
+        <p>Average energy savings</p>
+      </div>
+      <div class="stat-item">
+        <h3>500+</h3>
+        <p>Systems installed</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>Satisfaction guarantee</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>ENERGY STAR</span> Certified</div>
+  <div class="trust-item"><span>EPA</span> Approved</div>
+  <div class="trust-item"><span>NATE</span> Certified Technicians</div>
+  <div class="trust-item"><span>MBE</span> Minority Business Enterprise</div>
+  <div class="trust-item"><span>Licensed &amp; Insured</span></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">Green HVAC Solutions<br>for Every Need</h2>
+  <p class="section-sub">From heat pumps to solar-powered systems, we install and maintain cutting-edge equipment that works better and costs less to run.</p>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-icon">🌡️</div>
+      <h3>Heat Pump Installation</h3>
+      <p>Modern electric heat pumps provide both heating and cooling at 300–400% efficiency — far surpassing traditional gas furnaces while eliminating combustion entirely.</p>
+      <span class="service-tag">Most Popular</span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">❄️</div>
+      <h3>High-Efficiency A/C</h3>
+      <p>SEER 20+ electric cooling systems with smart thermostats and zoning controls for maximum comfort and minimum energy draw.</p>
+      <span class="service-tag">All-Electric</span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">☀️</div>
+      <h3>Solar-Assisted HVAC</h3>
+      <p>Pair your HVAC system with solar integration for near-zero operating costs. We handle the complete installation and utility coordination.</p>
+      <span class="service-tag">Zero Carbon</span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🏠</div>
+      <h3>Ductless Mini-Split</h3>
+      <p>Perfect for older homes or additions. Quiet, zone-controlled heating and cooling with no ductwork required and minimal installation disruption.</p>
+      <span class="service-tag">No Ducts Needed</span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">💧</div>
+      <h3>Geothermal Systems</h3>
+      <p>Harness stable ground temperatures for ultra-efficient climate control. High upfront investment with the lowest lifetime operating costs available.</p>
+      <span class="service-tag">Premium</span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🔧</div>
+      <h3>Maintenance &amp; Repair</h3>
+      <p>Preventive maintenance plans, emergency repair, and system tune-ups to keep your green HVAC running at peak performance year-round.</p>
+      <span class="service-tag">Annual Plans Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="why">
+  <div class="section-label">Why GreenAire</div>
+  <h2 class="section-title">Community-Rooted.<br>Future-Focused.</h2>
+  <div class="why-grid">
+    <div class="why-visual fade-in">
+      <div class="why-big-stat">$1,200</div>
+      <div class="why-big-label">Average annual savings per household</div>
+      <div class="divider"></div>
+      <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.7;">As a minority-owned business, we understand affordability. That's why we specialize in green technology that pays for itself — and then some.</p>
+    </div>
+    <div class="why-points">
+      <div class="why-point fade-in">
+        <div class="check">✓</div>
+        <div>
+          <h4>Minority-Owned &amp; Community-Driven</h4>
+          <p>Proudly certified Minority Business Enterprise. We reinvest in the communities we serve through fair wages, local hiring, and green education outreach.</p>
+        </div>
+      </div>
+      <div class="why-point fade-in">
+        <div class="check">✓</div>
+        <div>
+          <h4>Tax Credit Navigation</h4>
+          <p>We walk every customer through available federal and state rebates — including the Inflation Reduction Act's 30% tax credit — to maximize your savings.</p>
+        </div>
+      </div>
+      <div class="why-point fade-in">
+        <div class="check">✓</div>
+        <div>
+          <h4>Certified Green Technicians</h4>
+          <p>NATE-certified and manufacturer-trained on the latest heat pump and electric HVAC technology. We don't just install — we optimize.</p>
+        </div>
+      </div>
+      <div class="why-point fade-in">
+        <div class="check">✓</div>
+        <div>
+          <h4>10-Year Labor Warranty</h4>
+          <p>We stand behind our work with one of the industry's strongest labor warranties, backed by manufacturer equipment guarantees up to 12 years.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Four Steps to a<br>Greener Home</h2>
+  <div class="process-steps">
+    <div class="step fade-in">
+      <div class="step-num">1</div>
+      <h3>Free Consultation</h3>
+      <p>We assess your home, current system, and energy usage to design the right green solution for you.</p>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">2</div>
+      <h3>Custom Proposal</h3>
+      <p>Receive a detailed quote with equipment specs, projected savings, available tax credits, and financing options.</p>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">3</div>
+      <h3>Expert Installation</h3>
+      <p>Our certified crew handles everything — permits, installation, and utility coordination — in as little as one day.</p>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">4</div>
+      <h3>Ongoing Support</h3>
+      <p>24/7 emergency support, annual tune-ups, and performance monitoring to ensure your system runs perfectly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-label">Customer Stories</div>
+  <h2 class="section-title">Real Neighbors,<br>Real Savings</h2>
+  <div class="testimonials-grid">
+    <div class="t-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p>"GreenAire installed a heat pump system in our 1970s home and our electric bill dropped by $140/month. The crew was professional, fast, and respectful. Couldn't be happier."</p>
+      <div class="t-author">
+        <div class="avatar av1">MJ</div>
+        <div>
+          <div class="t-name">Marcus J.</div>
+          <div class="t-loc">Atlanta, GA · Heat Pump Installation</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p>"They explained every rebate available to us — we ended up paying 40% less than the original quote after credits. As a first-time homeowner, that made all the difference."</p>
+      <div class="t-author">
+        <div class="avatar av2">LR</div>
+        <div>
+          <div class="t-name">Lucia R.</div>
+          <div class="t-loc">Houston, TX · Ductless Mini-Split</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p>"As a small business owner, I needed reliable A/C and low operating costs. GreenAire delivered both. My commercial space is more comfortable and I'm saving over $3k per year."</p>
+      <div class="t-author">
+        <div class="avatar av3">DW</div>
+        <div>
+          <div class="t-name">Devon W.</div>
+          <div class="t-loc">Charlotte, NC · Commercial HVAC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section class="lead-form-section" id="contact">
+  <div class="orb orb1"></div>
+  <div class="form-container">
+    <div class="form-left">
+      <div class="section-label">Get Started Today</div>
+      <h2 class="section-title">Get Your Free<br>Green Energy Quote</h2>
+      <div class="form-perks">
+        <div class="perk"><span class="perk-icon">✅</span> Free in-home or virtual energy assessment</div>
+        <div class="perk"><span class="perk-icon">✅</span> Itemized quote with no hidden fees</div>
+        <div class="perk"><span class="perk-icon">✅</span> Tax credit &amp; rebate analysis included</div>
+        <div class="perk"><span class="perk-icon">✅</span> Zero-pressure, respond within 24 hours</div>
+        <div class="perk"><span class="perk-icon">✅</span> Financing starting at 0% APR for qualified customers</div>
+      </div>
+      <div style="margin-top:36px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:8px;">Or call us directly:</p>
+        <a href="tel:+18005550199" class="phone-cta">📞 1-800-555-0199</a>
+      </div>
+    </div>
+    <div class="form-box" id="form-box">
+      <h3>Request Free Quote</h3>
+      <p>Fill out the form and a green energy specialist will contact you within 24 hours.</p>
+      <form id="lead-form" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="john@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" placeholder="(555) 000-0000" required>
+        </div>
+        <div class="form-group">
+          <label>Zip Code *</label>
+          <input type="text" placeholder="30301" maxlength="5" required>
+        </div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Heat Pump Installation</option>
+            <option>High-Efficiency A/C</option>
+            <option>Solar-Assisted HVAC</option>
+            <option>Ductless Mini-Split</option>
+            <option>Geothermal System</option>
+            <option>Maintenance / Repair</option>
+            <option>Not Sure — Need Assessment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Property Type</label>
+          <select>
+            <option>Residential — Single Family</option>
+            <option>Residential — Condo / Apartment</option>
+            <option>Commercial — Small Business</option>
+            <option>Commercial — Multi-Unit</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything else we should know? (optional)</label>
+          <textarea placeholder="Tell us about your current system, square footage, or any concerns..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Get My Free Quote →</button>
+        <p class="form-note">🔒 Your information is 100% private. No spam, ever.</p>
+      </form>
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">🎉</div>
+        <h3>Request Received!</h3>
+        <p>Thank you! A GreenAire specialist will contact you within 24 hours to schedule your free consultation.</p>
+        <br>
+        <p style="font-size:0.85rem; color:#aaa;">Have questions in the meantime? Call <strong style="color:var(--forest);">1-800-555-0199</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section class="areas">
+  <div class="section-label">Where We Serve</div>
+  <h2 class="section-title">Our Service Areas</h2>
+  <p class="section-sub">Currently serving the Southeast and expanding rapidly. Don't see your city? Contact us — we may still be able to help.</p>
+  <div class="areas-grid">
+    <div class="area-chip">Atlanta, GA</div>
+    <div class="area-chip">Charlotte, NC</div>
+    <div class="area-chip">Houston, TX</div>
+    <div class="area-chip">Dallas, TX</div>
+    <div class="area-chip">Memphis, TN</div>
+    <div class="area-chip">Birmingham, AL</div>
+    <div class="area-chip">Nashville, TN</div>
+    <div class="area-chip">Jacksonville, FL</div>
+    <div class="area-chip">Columbia, SC</div>
+    <div class="area-chip">Montgomery, AL</div>
+    <div class="area-chip">Raleigh, NC</div>
+    <div class="area-chip">New Orleans, LA</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo">Green<span style="color:var(--gold)">Aire</span></div>
+      <p class="footer-desc">A minority-owned HVAC company committed to making clean, electric heating and cooling accessible to every home and business in our community.</p>
+      <div class="minority-badge">🏆 Certified Minority Business Enterprise</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Heat Pump Systems</a></li>
+        <li><a href="#">High-Efficiency A/C</a></li>
+        <li><a href="#">Solar HVAC</a></li>
+        <li><a href="#">Mini-Split Systems</a></li>
+        <li><a href="#">Geothermal</a></li>
+        <li><a href="#">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Mission</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Community Impact</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Tax Credit Guide</a></li>
+        <li><a href="#">Financing Options</a></li>
+        <li><a href="#">Energy Calculator</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2024 GreenAire HVAC LLC. All rights reserved. | <a href="#" style="color:rgba(255,255,255,0.4); text-decoration:none;">Privacy Policy</a> | <a href="#" style="color:rgba(255,255,255,0.4); text-decoration:none;">Terms</a></div>
+    <div style="color:rgba(255,255,255,0.3);">Licensed in GA · TX · NC · TN · AL · FL · SC · LA</div>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="sticky-bar">
+  <p>🌿 Ready to go green? <strong>Get a free energy assessment today.</strong></p>
+  <a href="#contact" class="btn-primary" style="font-size:0.9rem; padding:12px 28px;">Get Free Quote</a>
+</div>
+
+<script>
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.dataset.delay = (i % 4) * 100;
+    observer.observe(el);
+  });
+
+  // Sticky bar on scroll
+  window.addEventListener('scroll', () => {
+    const bar = document.getElementById('sticky-bar');
+    if (window.scrollY > 600) bar.classList.add('visible');
+    else bar.classList.remove('visible');
+  });
+
+  // Form submit
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('lead-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  // Phone input formatting
+  const phoneInput = document.querySelector('input[type="tel"]');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length >= 6) v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6,10)}`;
+      else if (v.length >= 3) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+      e.target.value = v;
+    });
+  }
+</script>
+</body>
+</html>
